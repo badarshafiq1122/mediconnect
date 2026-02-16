@@ -1,0 +1,165 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Dark mode follows the OS setting (no toggle), so the variant is the media query, not a .dark class. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* System sans everywhere: no external font fetch at build time, and it is what the dataviz guidance prescribes. */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(0.985 0.003 200);
+  --foreground: oklch(0.2 0.02 220);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 220);
+  /* Teal: calm, clinical, and 5.6:1 against white text. */
+  --primary: oklch(0.5 0.09 192);
+  --primary-foreground: oklch(0.99 0.005 190);
+  --secondary: oklch(0.955 0.012 200);
+  --secondary-foreground: oklch(0.28 0.04 210);
+  --muted: oklch(0.955 0.008 200);
+  --muted-foreground: oklch(0.48 0.02 220);
+  --accent: oklch(0.945 0.03 190);
+  --accent-foreground: oklch(0.3 0.06 200);
+  --destructive: oklch(0.55 0.21 27);
+  --border: oklch(0.905 0.01 210);
+  --input: oklch(0.88 0.012 210);
+  --ring: oklch(0.6 0.09 192);
+  --chart-1: oklch(0.6 0.1 192);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Status palette (fixed, never themed). Always paired with an icon and a label, never colour alone. */
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  /* Data-viz categorical slots 1-2 (validated with the dataviz palette validator, light surface). */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --viz-grid: #e1e0d9;
+  --viz-axis: #c3c2b7;
+  --viz-muted: #898781;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: oklch(0.16 0.012 220);
+    --foreground: oklch(0.96 0.005 200);
+    --card: oklch(0.21 0.015 220);
+    --card-foreground: oklch(0.96 0.005 200);
+    --popover: oklch(0.23 0.015 220);
+    --popover-foreground: oklch(0.96 0.005 200);
+    --primary: oklch(0.75 0.11 190);
+    --primary-foreground: oklch(0.2 0.03 200);
+    --secondary: oklch(0.27 0.018 220);
+    --secondary-foreground: oklch(0.96 0.005 200);
+    --muted: oklch(0.27 0.015 220);
+    --muted-foreground: oklch(0.72 0.015 210);
+    --accent: oklch(0.3 0.04 195);
+    --accent-foreground: oklch(0.96 0.005 200);
+    --destructive: oklch(0.7 0.19 22);
+    --border: oklch(1 0 0 / 11%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.6 0.09 192);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+
+    /* Dark-mode steps of the same two categorical hues, validated against the dark surface. */
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #383835;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
